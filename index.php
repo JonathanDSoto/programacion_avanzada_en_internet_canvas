@@ -14,9 +14,9 @@
 		canvas{
 			background-color: #F7D358;
 		}
-		img{
+		/*img{
 			visibility: hidden;
-		}
+		}*/
 	</style>
 </head>
 <body>
@@ -24,66 +24,77 @@
 		<canvas id="canvas" width="400" height="300">
 			Opps tu navegador no soporta CANVAS
 		</canvas>
-		<img id="pingu" src="bubujas.png">
+		<!-- <img id="pingu" src="burbujas.png"> -->
 	</div>
 	<script type="text/javascript">
 		window.onload = function(){
 			var canvas = document.getElementById('canvas');
+			var color = "rgb(255,0,0)";
+			var isPressed = false;
 			if (canvas.getContext) {
 				var ctx = canvas.getContext('2d');
 
-				//cuadrado
-				// ctx.fillStyle = "rgb(255,0,0)";
-				// ctx.fillRect (10, 10, 55, 50);
+				// canvas.addEventListener('click',function(evt){ 
 
-				// ctx.fillStyle = "rgba(0,0,200,0.5)";
-				// ctx.fillRect(30,30,55,50);
+				// 	ctx.fillStyle = "rgb(255,0,0)"; 
+				// 	ctx.beginPath();
+				// 	ctx.arc(evt.offsetX, evt.offsetY,10,0,2*Math.PI)
+				// 	ctx.fill()
+				// })
 
-				// ctx.strokeStyle = "green";
-				// ctx.strokeRect(70,70,55,50);
+				// canvas.addEventListener('mouseover',function(evt){
+				// 	ctx.fillStyle = color; 
+				// 	ctx.beginPath();
+				// 	ctx.arc(evt.offsetX, evt.offsetY,5,0,2*Math.PI)
+				// 	ctx.fill() 
+				// });
 
-				//linea
-				// ctx.moveTo(0,0);
-				// ctx.lineTo(200,100);
-				// ctx.lineTo(50,70);
-				// ctx.lineTo(100,20);
-				// ctx.lineTo(0,0)
-				// ctx.fill();
+				canvas.addEventListener('mouseout',function(evt){
+					color = getRandomColor();
+				});
 
-				//circulo
-				// ctx.beginPath();
-				// ctx.fillStyle = "green";
-				// ctx.arc(95, 50, 40, 0, 2 * Math.PI);
-				// ctx.fill();
-				// ctx.closePath();
+				canvas.addEventListener('mousemove',function(evt){
+					if(isPressed)
+					{
+						ctx.fillStyle = color; 
+						ctx.beginPath();
+						ctx.arc(evt.offsetX, evt.offsetY,5,0,2*Math.PI)
+						ctx.fill();
+					}
+					
+				});
 
-				//texto
-				// ctx.font = "30px Arial";
-				// ctx.strokeText("Hola mundo",10,50);
+				canvas.addEventListener('mousedown',function(evt){
+					isPressed = true;
+				});
 
-				//linear Gradiant
-				// var grd = ctx.createLinearGradient(0,0,200,0);
-				// grd.addColorStop(0,"red");
-				// grd.addColorStop(1,"white");
+				canvas.addEventListener('mouseup',function(evt){
+					isPressed = false;
+				});
 
-				// ctx.fillStyle = grd;
-				// ctx.fillRect (10, 10, 150, 80);
+				// document.addEventListener('keydown',function(evt){
+				// 	console.log(evt)
+				// })
 
-				//radial Gradiant
-				// var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
-				// grd.addColorStop(0,"red");
-				// grd.addColorStop(1,"white");
+				// document.addEventListener('keyup',function(evt){
+				// 	console.log(evt)
+				// })
 
-				// ctx.fillStyle = grd;
-				// ctx.fillRect(10, 10, 150, 80);
-
-
-				//imagen
-				var img = document.getElementById('pingu');
-				ctx.drawImage(img,0,0);
+				// document.addEventListener('keypress',function(evt){
+				// 	console.log(evt)
+				// })
+				
 			}
 		}
 
+		function getRandomColor() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+		  	}
+		  	return color;
+		}
 		 
 	</script>
 </body>
