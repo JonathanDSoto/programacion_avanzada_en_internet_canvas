@@ -61,12 +61,24 @@
 			});
 
 			canvas.addEventListener('mousedown',function(evt){
-				isPreseed = true;
+				isPreseed = true; 
 			});
 
 			canvas.addEventListener('mouseup',function(evt){
 				isPreseed = false;
 			});
+
+			document.addEventListener('keypress',function(e){
+				console.log(e)
+			})
+
+			document.addEventListener('keydown',function(e){
+				console.log(e)
+			})
+
+			document.addEventListener('keyup',function(e){
+				console.log(e)
+			})
 			 
 		}
 
