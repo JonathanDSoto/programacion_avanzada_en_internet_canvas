@@ -24,72 +24,47 @@
 
 	</div>
 	<script type="text/javascript">
-		var canvas = document.getElementById('canvas');
-		var color = "blue";
-		var isPreseed = false;
-		if( canvas.getContext )
+		var canvas = null, ctx = null, x = 0, y = 0;
+
+		window.requestAnimationFrame = (function(){
+			return window.requestAnimationFrame || 
+			window.mozRequestAnimationFrame || 
+			window.webkitRequestAnimationFrame || 
+			function (callback){
+				window.setTimeout(callback,17);
+			}
+		}());
+
+		function paint(ctx)
 		{
-			var ctx = canvas.getContext('2d'); 
+			ctx.fillStyle = "black";
+			ctx.fillRect(0,0,canvas.width,canvas.height)
 
-			/*canvas.addEventListener("click",function(evt){ 
-
-				ctx.fillStyle = 'rgb(0,0,200)';
-				ctx.beginPath();
-				ctx.arc(evt.layerX,evt.layerY,5,0,2*Math.PI) 
-				ctx.fill();
-			});*/
-
-			canvas.addEventListener('mouseover',function(evt){
-				ctx.fillStyle = color;
-				ctx.beginPath();
-				ctx.arc(evt.layerX,evt.layerY,5,0,2*Math.PI) 
-				ctx.fill();
-			});
-
-			canvas.addEventListener('mouseout',function(evt){
-				color = getRandomColor();
-			});
-
-			canvas.addEventListener('mousemove',function(evt){
-				if (isPreseed) {
-					ctx.fillStyle = color;
-					ctx.beginPath();
-					ctx.arc(evt.layerX,evt.layerY,5,0,2*Math.PI) 
-					ctx.fill();
-				}
-				
-			});
-
-			canvas.addEventListener('mousedown',function(evt){
-				isPreseed = true; 
-			});
-
-			canvas.addEventListener('mouseup',function(evt){
-				isPreseed = false;
-			});
-
-			document.addEventListener('keypress',function(e){
-				console.log(e)
-			})
-
-			document.addEventListener('keydown',function(e){
-				console.log(e)
-			})
-
-			document.addEventListener('keyup',function(e){
-				console.log(e)
-			})
-			 
+			ctx.fillStyle = "#0f0";
+			ctx.fillRect(x,y,10,10);
 		}
 
-		function getRandomColor() {
-		  var letters = '0123456789ABCDEF';
-		  var color = '#';
-		  for (var i = 0; i < 6; i++) {
-		    color += letters[Math.floor(Math.random() * 16)];
-		  }
-		  return color;
+		function act(){
+
+			x += 2;
+			if(x > canvas.width){
+				x = -10;
+			}
 		}
+
+		function run(){
+			window.requestAnimationFrame(run);
+			act();
+			paint(ctx);
+		}
+
+		function init(){
+			canvas = document.getElementById('canvas');
+			ctx = canvas.getContext('2d');
+			run();
+		} 
+		
+		window.addEventListener('load',init,false);
 		
 	</script>
 </body>
