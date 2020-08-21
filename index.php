@@ -9,7 +9,7 @@
 			width: 80%;
 			background-color: gray;
 			margin: auto;
-			min-height: 500px;
+			min-height: 200px;
 		} 
 		canvas{
 			background-color: #F7D358;
@@ -27,74 +27,66 @@
 		<!-- <img id="pingu" src="burbujas.png"> -->
 	</div>
 	<script type="text/javascript">
-		window.onload = function(){
-			var canvas = document.getElementById('canvas');
-			var color = "rgb(255,0,0)";
-			var isPressed = false;
-			if (canvas.getContext) {
-				var ctx = canvas.getContext('2d');
+		var canvas = null, ctx = null,x=0,y=0;
 
-				// canvas.addEventListener('click',function(evt){ 
+		window.requestAnimationFrame = (function(){
+			return window.requestAnimationFrame || 
+				window.mozRequestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				function (callback){
+					window.setTimeout(callback,17);
+				}
+		}());
 
-				// 	ctx.fillStyle = "rgb(255,0,0)"; 
-				// 	ctx.beginPath();
-				// 	ctx.arc(evt.offsetX, evt.offsetY,10,0,2*Math.PI)
-				// 	ctx.fill()
-				// })
+		function paint(ctx)
+		{
+			ctx.fillStyle = "#fff";
+			ctx.fillRect(0,0,canvas.width,canvas.height);
 
-				// canvas.addEventListener('mouseover',function(evt){
-				// 	ctx.fillStyle = color; 
-				// 	ctx.beginPath();
-				// 	ctx.arc(evt.offsetX, evt.offsetY,5,0,2*Math.PI)
-				// 	ctx.fill() 
-				// });
+			ctx.fillStyle="red";
+			ctx.fillRect(x,y,10,10);
+		}
 
-				canvas.addEventListener('mouseout',function(evt){
-					color = getRandomColor();
-				});
+		function upt(){
+			// x += 2;
+			// if(x>canvas.width){
+			// 	x = -10;
+			// }
 
-				canvas.addEventListener('mousemove',function(evt){
-					if(isPressed)
-					{
-						ctx.fillStyle = color; 
-						ctx.beginPath();
-						ctx.arc(evt.offsetX, evt.offsetY,5,0,2*Math.PI)
-						ctx.fill();
-					}
-					
-				});
-
-				canvas.addEventListener('mousedown',function(evt){
-					isPressed = true;
-				});
-
-				canvas.addEventListener('mouseup',function(evt){
-					isPressed = false;
-				});
-
-				// document.addEventListener('keydown',function(evt){
-				// 	console.log(evt)
-				// })
-
-				// document.addEventListener('keyup',function(evt){
-				// 	console.log(evt)
-				// })
-
-				// document.addEventListener('keypress',function(evt){
-				// 	console.log(evt)
-				// })
-				
+			x -= 2;
+			if (x<0) {
+				x = canvas.width;
 			}
+
+			// y += 2;
+			// if(y>=canvas.height){
+			// 	y = -10;
+			// }
+
+			// y -=2;
+			// if(y<0){
+			// 	y = canvas.height;
+			// }
 		}
 
-		function getRandomColor() {
-			var letters = '0123456789ABCDEF';
-			var color = '#';
-			for (var i = 0; i < 6; i++) {
-				color += letters[Math.floor(Math.random() * 16)];
-		  	}
-		  	return color;
+		//se repite mucho
+		function run(){
+			window.requestAnimationFrame(run)
+			upt();
+			paint(ctx);
 		}
+
+		function init(){
+			canvas = document.getElementById('canvas');
+			ctx = canvas.getContext('2d');
+			run();
+		}
+
+		window.addEventListener('load',init,false);  
+
+		document.addEventListener('keydown',function(e){
+			
+		})
 		 
 	</script>
 </body>
