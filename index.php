@@ -29,8 +29,9 @@
 	<script type="text/javascript">
 		var canvas = null, ctx = null,x=0,y=0; 
 		var LEFT = 1,UP = 0, RIGHT = 2, DOWN = 3;
-		var lastPress = RIGHT, speed = 5;
-		var player = null, food = null;
+		var lastPress = RIGHT, speed = 2;
+		var player = null, food = null, score = 0;
+		var pause = false, walls = Array(), gameOver = false;
 
 		window.requestAnimationFrame = (function(){
 			return window.requestAnimationFrame || 
@@ -71,38 +72,75 @@
 			player.paint(ctx); 
 
 			food.paint(ctx);
+
+			for (var i = walls.length - 1; i >= 0; i--) {
+				walls[i].paint(ctx)
+			} 
+
+			ctx.fillStyle="white";
+			ctx.textAlign = "left";
+			ctx.fillText('SCORE: '+score+" SPEED: "+speed,2,10);
+
+			if(pause && !gameOver){
+				ctx.fillStyle="white";
+				ctx.textAlign = "center";
+				ctx.fillText('P A U S E',195,150);
+			}
+
+			if(gameOver){
+				ctx.fillStyle="white";
+				ctx.textAlign = "center";
+				ctx.fillText('G A M E O V E R',195,150);
+			}
+
 		}
 
 		function upt(){
 
-			if (lastPress==UP) {
-				player.y -=speed;
-				if(player.y<0){
-					player.y = canvas.height;
+			if(!pause)
+			{
+				if(!gameOver){ 
+
+					if (lastPress==UP) {
+						player.y -=speed;
+						if(player.y<0){
+							player.y = canvas.height;
+						}
+					}
+					if (lastPress==DOWN) {
+						player.y += speed;
+						if(player.y>=canvas.height){
+							player.y = -10;
+						}
+					}
+					if (lastPress==LEFT) {
+						player.x -= speed;
+						if (player.x<0) {
+							player.x = canvas.width;
+						}
+					}
+					if (lastPress==RIGHT) {
+						player.x += speed;
+						if(player.x>canvas.width){
+							player.x = -10;
+						}
+					}  
+					
+					if (player.intersects(food)) {
+						food.x = random(canvas.width-10);
+						food.y = random(canvas.height-10);
+						score += 10;
+						speed += 0.3;
+					}
+
+					for (var i = walls.length - 1; i >= 0; i--) {
+						if(player.intersects(walls[i])){
+							gameOver = true;
+							setTimeout('reset()',3000);
+						}
+					}
+				
 				}
-			}
-			if (lastPress==DOWN) {
-				player.y += speed;
-				if(player.y>=canvas.height){
-					player.y = -10;
-				}
-			}
-			if (lastPress==LEFT) {
-				player.x -= speed;
-				if (player.x<0) {
-					player.x = canvas.width;
-				}
-			}
-			if (lastPress==RIGHT) {
-				player.x += speed;
-				if(player.x>canvas.width){
-					player.x = -10;
-				}
-			}  
-			
-			if (player.intersects(food)) {
-				food.x = random(canvas.width-10);
-				food.y = random(canvas.height-10);
 			}
 		}
 
@@ -113,30 +151,50 @@
 			paint(ctx);
 		}
 
+		function reset(){
+			gameOver = false;
+			lastPress = RIGHT;
+			spped = null;
+			speed = 2;
+			score = 0;
+
+			player.x = 10;
+			player.y = 10;
+		}
+
 		function init(){
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
+			ctx.clearRect(0,0, canvas.width, canvas.height);
 
 			player = new Rectangle(x,y,10,10,"#00FF00")
 			food = new Rectangle((canvas.width/2-10),(canvas.height/2-10),10,10,"red")
 
+			walls.push(new Rectangle(80,80,10,10,"gray")) 
+			walls.push(new Rectangle(80,210,10,10,"gray")) 
+			walls.push(new Rectangle(290,80,10,10,"gray")) 
+			walls.push(new Rectangle(290,210,10,10,"gray"))  
+			
 			run();
 		}
 
 		window.addEventListener('load',init,false);  
 
 		document.addEventListener('keydown',function(e){
-			if(e.keyCode== 87 || e.keyCode == 38){
+			if(e.keyCode== 87 || e.keyCode == 38 && !pause){
 				lastPress = UP;
 			}
-			if(e.keyCode== 83 || e.keyCode == 40){
+			if(e.keyCode== 83 || e.keyCode == 40 && !pause){
 				lastPress = DOWN;
 			}
-			if(e.keyCode== 65 || e.keyCode == 37){
+			if(e.keyCode== 65 || e.keyCode == 37 && !pause){
 				lastPress = LEFT;
 			}
-			if(e.keyCode== 68 || e.keyCode == 39){
+			if(e.keyCode== 68 || e.keyCode == 39 && !pause){
 				lastPress = RIGHT;
+			}
+			if(e.keyCode==32){
+				pause = (pause)?false:true;
 			}
 		})
 		 
