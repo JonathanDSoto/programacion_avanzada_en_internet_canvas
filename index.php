@@ -28,6 +28,9 @@
 		var lastPress = 65, speed = 2, player = null, food =null;
 		var score = 0, pause = false, walls = new Array();
 		var gameOver = false;
+		var body = new Image(), apple = new Image();
+		var eat = new Audio(), end = new Audio(), ps = new Audio();
+		var lastUpdate = 0, FPS, frames, acumDelta=0;
 
 		window.requestAnimationFrame = (function(){
 			return window.requestAnimationFrame || 
@@ -45,13 +48,15 @@
 
 			ctx.fillStyle = "#0f0";
 			player.paint(ctx);
+			//ctx.drawImage(body,player.x,player.y);
 
 			ctx.fillStyle = "red";
 			food.paint(ctx);
+			//ctx.drawImage(apple,food.x,food.y);
 
 			ctx.fillStyle = "white";
 			ctx.textAlign = "left";
-			ctx.fillText("SCORE: "+score+" SPEED: "+speed,10,10);
+			ctx.fillText("SCORE: "+score+" SPEED: "+speed+" FPS: "+FPS,10,10);
 
 			ctx.fillStyle = "#9E9A99";
 			for (var i = walls.length - 1; i >= 0; i--) {
@@ -109,12 +114,15 @@
 						food.y = random(canvas.height);
 						score += 10;
 						speed += 0.2; 
+						eat.play();
 					}
 
 					for (var i = walls.length - 1; i >= 0; i--) {
 						if(walls[i].intersects(player)){
 							gameOver = true;
 							lastPress = null; 
+							setTimeout('reset()',3000);
+							end.play();
 						}
 					}
 
@@ -126,20 +134,57 @@
 			window.requestAnimationFrame(run);
 			act();
 			paint(ctx);
+
+			var now = Date.now(); 
+				deltaTime = (now - lastUpdate) / 1000;
+			if(deltaTime > 1){
+				deltaTime = 0;
+			}
+			lastUpdate = now;
+
+			frames += 1;
+			acumDelta += deltaTime;
+			if(acumDelta>1){
+				FPS = frames;
+				frames = 0;
+				acumDelta -=1;
+			}
+		}
+
+		function reset()
+		{
+			gameOver = false;
+			lastPress = 65;
+			speed = 2;
+			score = 0;
+
+			player.x = 0;
+			player.y = 0;
+
+			food.x = 70;
+			food.y = 50;
 		}
 
 		function init(){
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
 
-			player = new Rectangle(0,0,10,10);
-			food = new Rectangle(70,50,10,10);
+			body.src = "assets/head.png";
+			apple.src = "assets/apple.png";
 
-			walls.push(new Rectangle(100,50,10,10));
-			walls.push(new Rectangle(100,200,10,10));
+			player = new Rectangle(0,0,10,10,body);
+			food = new Rectangle(70,50,10,10,apple);
 
-			walls.push(new Rectangle(400,50,10,10));
-			walls.push(new Rectangle(400,200,10,10));
+			walls.push(new Rectangle(100,50,10,10,null));
+			walls.push(new Rectangle(100,200,10,10,null));
+
+			walls.push(new Rectangle(400,50,10,10,null));
+			walls.push(new Rectangle(400,200,10,10,null)); 
+
+			eat.src = "assets/crunch.mp3"; 
+			end.src = "assets/game_over.mp3";
+			ps.src = "assets/pause.mp3";
+			
 
 			run();
 		} 
@@ -152,6 +197,7 @@
 			else if(e.keyCode==32){
 
 				pause = (pause)?false:true; 
+				ps.play();
 			}
 		})
 
@@ -159,14 +205,23 @@
 			console.log("Test")
 		}
 
-		function Rectangle(x,y,w,h){
+		function Rectangle(x,y,w,h,image){
 			this.x = x;
 			this.y = y;
 			this.w = w;
 			this.h = h;
+			this.image = image;
 
 			this.paint = function(ctx){
-				ctx.fillRect(this.x,this.y,this.w,this.h);
+				if(image!=null){
+					try{
+						ctx.drawImage(this.image,this.x,this.y);
+					}catch(e){
+						ctx.fillRect(this.x,this.y,this.w,this.h);
+					}
+					
+				}else
+					ctx.fillRect(this.x,this.y,this.w,this.h);
 			}
 
 			this.intersects = function(rect){
