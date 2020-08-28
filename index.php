@@ -32,6 +32,10 @@
 		var lastPress = RIGHT, speed = 2;
 		var player = null, food = null, score = 0;
 		var pause = false, walls = Array(), gameOver = false;
+		var player_body = new Image(), food_img = new Image();
+		var crunch = new Audio(), die = new Audio(), sound_p = new Audio();
+
+		var lastUpdate = 0,FPS, frames = 0, acumDelta = 0;
 
 		window.requestAnimationFrame = (function(){
 			return window.requestAnimationFrame || 
@@ -42,16 +46,27 @@
 				}
 		}());
 
-		function Rectangle(x,y,w,h,c){
+		function Rectangle(x,y,w,h,c,i){
 			this.x=x;
 			this.y=y;
 			this.w=w;
 			this.h=h;
 			this.c=c;
+			this.i=i;
 
 			this.paint =function(ctx){
-				ctx.fillStyle=this.c;
-				ctx.fillRect(this.x,this.y,this.w,this.h);
+				if(this.i!=null){
+					try{
+						ctx.drawImage(this.i,this.x,this.y);
+					}catch{
+						ctx.fillStyle=this.c;
+						ctx.fillRect(this.x,this.y,this.w,this.h);
+					}
+					
+				}else{
+					ctx.fillStyle=this.c;
+					ctx.fillRect(this.x,this.y,this.w,this.h);
+				} 
 			}
 
 			this.intersects = function(target){
@@ -79,7 +94,7 @@
 
 			ctx.fillStyle="white";
 			ctx.textAlign = "left";
-			ctx.fillText('SCORE: '+score+" SPEED: "+speed,2,10);
+			ctx.fillText('SCORE: '+score+" SPEED: "+speed+" FPS: "+FPS,2,10);
 
 			if(pause && !gameOver){
 				ctx.fillStyle="white";
@@ -131,12 +146,16 @@
 						food.y = random(canvas.height-10);
 						score += 10;
 						speed += 0.3;
+						crunch.pause();
+						crunch.currentTime = 0;
+						crunch.play();
 					}
 
 					for (var i = walls.length - 1; i >= 0; i--) {
 						if(player.intersects(walls[i])){
 							gameOver = true;
 							setTimeout('reset()',3000);
+							die.play();
 						}
 					}
 				
@@ -147,8 +166,24 @@
 		//se repite mucho
 		function run(){
 			window.requestAnimationFrame(run)
+
+			var now = Date.now();
+			deltaTime = (now-lastUpdate) / 1000;
+			if(deltaTime>1){
+				deltaTime = 0;
+			}
+			lastUpdate = now;
+
+			frames += 1;
+			acumDelta += deltaTime;
+			if(acumDelta>1){
+				FPS = frames;
+				frames = 0;
+				acumDelta -= 1;
+			}
+
 			upt();
-			paint(ctx);
+			paint(ctx); 
 		}
 
 		function reset(){
@@ -157,6 +192,8 @@
 			spped = null;
 			speed = 2;
 			score = 0;
+			die.pause();
+			die.currentTime = 0;
 
 			player.x = 10;
 			player.y = 10;
@@ -167,13 +204,20 @@
 			ctx = canvas.getContext('2d');
 			ctx.clearRect(0,0, canvas.width, canvas.height);
 
-			player = new Rectangle(x,y,10,10,"#00FF00")
-			food = new Rectangle((canvas.width/2-10),(canvas.height/2-10),10,10,"red")
+			player_body.src ="assets/player.png";
+			food_img.src ="assets/food.png";
 
-			walls.push(new Rectangle(80,80,10,10,"gray")) 
-			walls.push(new Rectangle(80,210,10,10,"gray")) 
-			walls.push(new Rectangle(290,80,10,10,"gray")) 
-			walls.push(new Rectangle(290,210,10,10,"gray"))  
+			crunch.src = "assets/crunch.mp3";
+			die.src = "assets/die.mp3";
+			sound_p.src = "assets/pause.mp3";
+
+			player = new Rectangle(x,y,10,10,"#00FF00",player_body)
+			food = new Rectangle((canvas.width/2-10),(canvas.height/2-10),10,10,"red",food_img); 
+
+			walls.push(new Rectangle(80,80,10,10,"gray",null)) 
+			walls.push(new Rectangle(80,210,10,10,"gray",null)) 
+			walls.push(new Rectangle(290,80,10,10,"gray",null)) 
+			walls.push(new Rectangle(290,210,10,10,"gray",null))  
 			
 			run();
 		}
@@ -195,6 +239,9 @@
 			}
 			if(e.keyCode==32){
 				pause = (pause)?false:true;
+				sound_p.pause();
+				sound_p.currentTime = 0;
+				sound_p.play();
 			}
 		})
 		 
