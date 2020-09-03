@@ -1,3 +1,7 @@
+<?php
+	//$info = file_get_contents("https://jsonplaceholder.typicode.com/todos/"); 
+	$info = 0;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,23 +25,48 @@
 		.patito{
 			border-color: lightcoral;
 		}
+		.otra_clase{
+			background-color: purple !important;
+		}
 	</style>
 </head>
 <body>
 
 	<div class="super_div">
 		<div  id="primer_div" class=" otra_clase mini_div" style="background-color: #2ECC71;"></div>
-		<div class="mini_div" style="background-color: #D98880;"></div>
+		<div class="mini_div" style="background-color: #D98880;">
+			
+			<input type="" value="10" id="edad" placeholder="edad" name="">
+			<button onclick="accion()">
+				Acción
+			</button>
+
+		</div>
 		<div  class="otra_clase mini_div" style="background-color: #F9E79F;"></div>
 	</div>
 
  	<script type="text/javascript" src="assets/js/jquery.js"></script>
  	<script type="text/javascript">
- 		$(document).ready(function(){
- 			console.log($("#primer_div"))
- 			$("#primer_div").addClass('patito')
- 			$("#primer_div").css('background-color','yellow')
+ 		$(document).ready(function(){ 
+
+ 			// $("button").click(function(){
+ 			// 	alert("hola")
+ 			// })
+
+ 			$("button").on('click',function(){
+ 				var edad = $("#edad").val()
+ 				alert("hola, tu edad es: "+edad)
+ 			})
+
+ 			$(".mini_div").hover(function(){
+ 				$(this).toggleClass('otra_clase')
+ 			})
+
  		})
+ 		function accion()
+ 		{
+ 			console.log("X")
+ 		}
  	</script>
 </body>
 </html>
