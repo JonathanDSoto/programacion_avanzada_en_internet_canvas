@@ -1,3 +1,8 @@
+<?php 
+	$info = "";
+ 	#$info = file_get_contents('https://jsonplaceholder.typicode.com/todos/');
+	
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +57,7 @@
 		</div> 
 
 		<div class="table">
-			<h1 id="title_2" style="color:red;">
+			<h1 id="title_2" style="">
 				Encabezado
 			</h1>
 
@@ -63,6 +68,16 @@
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>
+
+				<label for="email">
+					Suscribirse
+				</label>
+
+				<input type="email"  name="email" id="email">
+				<br>
+				<button data-info='<?= $info ?>' >
+					Guardar 
+				</button>
 
 				<a href="">
 					Leer más
@@ -83,6 +98,16 @@
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>
 
+
+				<select id="combo">
+					<option>
+						1
+					</option>
+					<option>
+						2
+					</option>
+				</select> 
+
 				<a href="">
 					Leer más
 				</a>
@@ -94,27 +119,49 @@
 
 	<script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			
-			//selección por ID
-			$("#title_2").css({'font-size':'22px'});
+		$(document).ready(function(){ 
 
-			$("#title_2").addClass('amarilloso')
-
-			var enlaces = $("a");
-			console.log(enlaces)
-			
-			$.each(enlaces,function(k,enlace){
-				$(enlace).attr({'href':'https://api.jquery.com/addClass/','target':'_blank'})
+			$("#combo").change(function(){
+				console.log(this)
 			})
 
+			$("div.table").hover(function(){
+				$(this).css('background-color','purple')
+			})
 
-			//selección por CLASS
-			var seleccion2 = $(".table");
+			// $("button").one('click',function(){
+			// 	console.log('one')
+			// })
 
-			$("p:last").html('<p>Sin contenido</p>')
+			$("button").on('click',function(){
+				console.log('on')
+
+				var email = $("#email").val()
+				console.log(email)
+
+				var label = $("label").html('<h1>'+email+'</h1>')
+				console.log(label)
+			})
+
+			// $("button").bind('click',function(){
+			// 	console.log("bind")
+			// })
+			
+			$("button").click(function(){
+				// console.log(this)
+				// var info = $(this).data('info')
+			
+				// $.each(info,function(k,user){
+				// 	console.log( user )
+				// })
+			})
 
 		})
-	</script>
+		function saludo(target)
+		{	
+			
+			
+		}
+	</script> 
 </body>
 </html>
