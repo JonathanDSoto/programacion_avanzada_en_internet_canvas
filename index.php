@@ -42,7 +42,16 @@
 			</button>
 
 		</div>
-		<div  class="otra_clase mini_div" style="background-color: #F9E79F;"></div>
+		<div  class="otra_clase mini_div" style="background-color: #F9E79F;">
+			<p id="parrafo_12">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</b>
+			</p>
+		</div>
 	</div>
 
  	<script type="text/javascript" src="assets/js/jquery.js"></script>
@@ -53,9 +62,18 @@
  			// 	alert("hola")
  			// })
 
+ 			$("#edad").on('focus',function(){
+ 				console.log("focus")
+ 			})
+
+ 			$("#edad").on('blur',function(){
+ 				console.log("blur")
+ 			})
+
  			$("button").on('click',function(){
- 				var edad = $("#edad").val()
- 				alert("hola, tu edad es: "+edad)
+ 				// var edad = $("#edad").val()
+ 				// alert("hola, tu edad es: "+edad)
+ 				$("#parrafo_12").remove()
  			})
 
  			$(".mini_div").hover(function(){
