@@ -42,18 +42,18 @@
 				Encabezado
 			</h1>
 
-			<p>
+			<p class="parrafo_1">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>
-
-				<a href="">
-					Leer más
-				</a>
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br> 
 			</p>
+
+			<button class="uno">
+				Presioname
+			</button>
 		</div> 
 
 		<div class="table">
@@ -61,28 +61,18 @@
 				Encabezado
 			</h1>
 
-			<p>
+			<p class="parrafo_2" style="display: none;">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>
-
-				<label for="email">
-					Suscribirse
-				</label>
-
-				<input type="email"  name="email" id="email">
-				<br>
-				<button data-info='<?= $info ?>' >
-					Guardar 
-				</button>
-
-				<a href="">
-					Leer más
-				</a>
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>  
 			</p>
+
+			<button class="dos">
+				Presioname
+			</button>
 		</div> 
 
 		<div class="table">
@@ -90,28 +80,19 @@
 				Encabezado
 			</h1>
 
-			<p>
+			<p id="parrafo">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <br>
-
-
-				<select id="combo">
-					<option>
-						1
-					</option>
-					<option>
-						2
-					</option>
-				</select> 
-
-				<a href="">
-					Leer más
-				</a>
+				
 			</p>
+
+			<button class="tres">
+				Presioname
+			</button>
 		</div> 
 
 	</div> 
@@ -121,47 +102,30 @@
 	<script type="text/javascript">
 		$(document).ready(function(){ 
 
-			$("#combo").change(function(){
-				console.log(this)
+			$('button.uno').click(function(){
+
+				$('.parrafo_1').animate(
+				    { 
+				        opacity : '-=0.25',
+				        fontSize: '+=5px'
+				    },
+				    900, // duration
+				 
+				    // función de devolución de llamada
+				    function() { console.log('realizado');
+				});
+
+			}) 
+
+			$(".dos").click(function(){
+				$(".parrafo_2").show(5000)
+			})
+			
+			$(".tres").click(function(){
+				$("#parrafo").hide(4000)
 			})
 
-			$("div.table").hover(function(){
-				$(this).css('background-color','purple')
-			})
-
-			// $("button").one('click',function(){
-			// 	console.log('one')
-			// })
-
-			$("button").on('click',function(){
-				console.log('on')
-
-				var email = $("#email").val()
-				console.log(email)
-
-				var label = $("label").html('<h1>'+email+'</h1>')
-				console.log(label)
-			})
-
-			// $("button").bind('click',function(){
-			// 	console.log("bind")
-			// })
-			
-			$("button").click(function(){
-				// console.log(this)
-				// var info = $(this).data('info')
-			
-				// $.each(info,function(k,user){
-				// 	console.log( user )
-				// })
-			})
-
-		})
-		function saludo(target)
-		{	
-			
-			
-		}
+		}) 
 	</script> 
 </body>
 </html>
