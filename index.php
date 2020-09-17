@@ -95,12 +95,84 @@
 			</button>
 		</div> 
 
+		<hr>
+
+		<button id="get">
+			Get
+		</button>
+
+		<button id="ajax">
+			Ajax
+		</button>
+
+		<button id="script">
+			Script
+		</button>
+
+		<button id="json">
+			Json
+		</button>
+
 	</div> 
 
 
 	<script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){ 
+
+			$("#get").click(function(){
+
+				$.get('https://jsonplaceholder.typicode.com/todos/',
+					function(r){
+						console.log(r)
+						//$(".container").append(r)
+					})
+			})
+
+			$("#ajax").click(function(){
+				$.ajax({ 
+    				url : 'post.php', 
+    				data:{ token:'asd1902jads' },
+    				type : 'POST', 
+    				dataType : 'json',
+    				success:function(r){
+    					console.log(r)
+    				},
+    				error:function(xhr,status)
+    				{
+    					console.log(xhr)
+    					console.log(status)
+    				},
+    				complete:function(xhr,status)
+    				{
+    					
+    				}
+				})
+				axios.post('post.php', {
+				    token: 'asd1902jads'
+				  })
+				  .then(function (response) {
+				    console.log(response);
+				  })
+				  .catch(function (error) {
+				    console.log(error);
+				  });
+			})
+
+			$("#script").click(function(){
+				$.getScript('assets/js/jquery-3.5.1.min.js', function() {
+				    console.log("hola")
+				});
+			})
+
+			$("#json").click(function(){
+				$.getJSON('https://jsonplaceholder.typicode.com/todos/', function(resp) {
+				    $.each(resp, function(k, v) {
+				        console.log(k + ' : ' + v);
+					}); 
+				});
+			})
 
 			$('button.uno').click(function(){
 
@@ -118,11 +190,11 @@
 			}) 
 
 			$(".dos").click(function(){
-				$(".parrafo_2").show(5000)
+				$(".parrafo_2").slideDown()
 			})
 			
 			$(".tres").click(function(){
-				$("#parrafo").hide(4000)
+				$("#parrafo").slideUp(4000)
 			})
 
 		}) 
