@@ -79,65 +79,43 @@
 				Click me 
 			</button>
 		</div>
+
 	</div>
 
  	<script type="text/javascript" src="assets/js/jquery.js"></script>
  	<script type="text/javascript">
- 		$(document).ready(function(){ 
+ 		$(document).ready(function(){
 
- 			$(".btn_1").click(function(){
+ 			$.get('footer.html',function(r){
+ 				$(".super_div").append(r);
+ 			}) 
 
- 				$('p.parrafo_1').animate(
-				    {
-				        fontSize : "+=2px",
-				        opacity : "-=0.10"
-				    },
-				    3000, // duration
-				 
-				    // función de devolución de llamada
-				    function() { console.log('realizado');
-				});
-
- 			})
  			$("#button_2").click(function(){
- 				//$(".parrafo_2").show(2000);
- 				//$(".parrafo_2").fadeIn(5000);
- 				$(".parrafo_2").slideDown(3000);
+
+ 				var response;
+	 			$.ajax({ 
+				    url : 'https://jsonplaceholder.typicode.com/todos/', 
+				    data : { }, 
+				    type : 'GET', 
+				    dataType : 'text', 
+				    success : function(r) {
+				        console.log(r)  
+				    }, 
+				    error : function(xhr, status) {
+				        console.log(xhr)
+				        console.log(status)
+				    }, 
+				    complete : function(xhr, status) {
+				        // console.log(xhr)
+				        // console.log(status)
+				    }
+				});
+	 			
+
  			})
+ 			
 
- 			$("button").last().click(function(){
- 				//$("#parrafo_12").hide();
- 				//$("#parrafo_12").fadeOut(5000);
- 				$("#parrafo_12").slideToggle(3000);
- 			})
-
- 			// $("button").click(function(){
- 			// 	alert("hola")
- 			// })
-
- 			// $("#edad").on('focus',function(){
- 			// 	console.log("focus")
- 			// })
-
- 			// $("#edad").on('blur',function(){
- 			// 	console.log("blur")
- 			// })
-
- 			// $("button").on('click',function(){
- 			// 	// var edad = $("#edad").val()
- 			// 	// alert("hola, tu edad es: "+edad)
- 			// 	$("#parrafo_12").remove()
- 			// })
-
- 			// $(".mini_div").hover(function(){
- 			// 	$(this).toggleClass('otra_clase')
- 			// })
-
- 		})
- 		function accion()
- 		{
- 			console.log("X")
- 		}
+ 		}) 
  	</script>
 </body>
 </html>
