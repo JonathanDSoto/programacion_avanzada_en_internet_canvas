@@ -94,9 +94,9 @@
 
  				var response;
 	 			$.ajax({ 
-				    url : 'https://jsonplaceholder.typicode.com/todos/', 
-				    data : { }, 
-				    type : 'GET', 
+				    url : 'proceso.php', 
+				    data : { year:var_year }, 
+				    type : 'POST', 
 				    dataType : 'text', 
 				    success : function(r) {
 				        console.log(r)  
