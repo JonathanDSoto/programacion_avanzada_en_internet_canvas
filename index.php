@@ -122,7 +122,7 @@
 		$(document).ready(function(){ 
 
 			$("#get").click(function(){
-
+				// console
 				$.get('https://jsonplaceholder.typicode.com/todos/',
 					function(r){
 						console.log(r)
@@ -132,8 +132,8 @@
 
 			$("#ajax").click(function(){
 				$.ajax({ 
-    				url : 'post.php', 
-    				data:{ token:'asd1902jads' },
+    				url : './post.php', 
+    				data:{ token:'asd1902jads',otro:1 },
     				type : 'POST', 
     				dataType : 'json',
     				success:function(r){
@@ -149,15 +149,15 @@
     					
     				}
 				})
-				axios.post('post.php', {
-				    token: 'asd1902jads'
-				  })
-				  .then(function (response) {
-				    console.log(response);
-				  })
-				  .catch(function (error) {
-				    console.log(error);
-				  });
+				// axios.post('post.php', {
+				//     token: 'asd1902jads'
+				//   })
+				//   .then(function (response) {
+				//     console.log(response);
+				//   })
+				//   .catch(function (error) {
+				//     console.log(error);
+				//   });
 			})
 
 			$("#script").click(function(){
