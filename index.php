@@ -1,213 +1,273 @@
-<?php
-	//$info = file_get_contents("https://jsonplaceholder.typicode.com/todos/"); 
-	$info = 0;
-?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Clase</title>
-	<style type="text/css">
-		.super_div{
-			width: 100%; 
-			background-color: #D5D8DC;
-		}
-		.mini_div{
-			width: 30%;
-			margin: 1%;
-			border-radius: 5px;
-			border-width: 1px;
-			border-style: solid;
-			border-color: black; 
-			float: left;
-		}
-		.patito{
-			border-color: lightcoral;
-		}
-		.otra_clase{
-			background-color: purple !important;
-		}
-		.line{
-			width: 100%;
-			min-height: 20px;
-		}
-		.mega_div{
-			width: 100%;
-			min-height: 200px;
-
-		}
-		.old_content{
-			width: 100%;
-			height: auto;
-		}
-	</style>
+	<title>
+		Learn bootstrap
+	</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 
-	<div class="super_div">
+	<div id="wrapper"> 
 
-		<!-- <div class="old_content"> 
+		<div class="container">
 
-			<div  id="primer_div" class=" otra_clase mini_div" style="background-color: #2ECC71;">
+			<!-- NAV -->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <a class="navbar-brand" href="#">
+			  	TACOS
+			  </a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav mr-auto">
+			      <li class="nav-item active">
+			        <a class="nav-link" href="#">
+			        	Inicio  
+			        </a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">
+			        	Link
+			        </a>
+			      </li>  
+			    </ul>
+			    <form class="form-inline my-2 my-lg-0">
+			      <input class="form-control mr-sm-2" type="search" placeholder="Escribe aquí" aria-label="Search">
+			      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+			      	Buscar
+			      </button>
+			    </form>
+			  </div>
+			</nav>
+
+			<!-- BREAD -->
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item active" aria-current="page">
+			    	Inicio
+			    </li>
+			  </ol>
+			</nav>
+
+			<!-- CAROUSEL -->
+			<div class="jumbotron">
+			  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				  <ol class="carousel-indicators">
+				    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+				    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+				    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+				  </ol>
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img src="assets/images/tacos_al_pastor_1.jpg" class="d-block w-100" alt="tacos al pastor">
+				      <div class="carousel-caption d-none d-md-block">
+				        <h5>First slide label</h5>
+				        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+				      </div>
+				    </div>
+				    <div class="carousel-item">
+				      <img src="assets/images/tacos_al_pastor_2.jpeg" class="d-block w-100" alt="...">
+				      <div class="carousel-caption d-none d-md-block">
+				        <h5>Second slide label</h5>
+				        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				      </div>
+				    </div>
+				    <div class="carousel-item">
+				      <img src="assets/images/tacos_al_pastor_3.jpg" class="d-block w-100" alt="...">
+				      <div class="carousel-caption d-none d-md-block">
+				        <h5>Third slide label</h5>
+				        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+				      </div>
+				    </div>
+				  </div>
+				  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div> 
+
+			<!-- CARDS -->
+			<div class="row">
+				<div class="col-12"> 
 				
-				<p class="parrafo_1">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
+					<div class="card-deck mb-4">
 
-				<button class="btn_1">
-					Click me 
-				</button>
+					  <div class="card">
+					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
+					    <div class="card-body">
+					      <h5 class="card-title">Card title</h5>
+					      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+					    </div>
+					    <div class="card-footer">
+					      <small class="text-muted">Last updated 3 mins ago</small>
+					    </div>
+					  </div>
 
+					  <div class="card">
+					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
+					    <div class="card-body">
+					      <h5 class="card-title">Card title</h5>
+					      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+					    </div>
+					    <div class="card-footer">
+					      <small class="text-muted">Last updated 3 mins ago</small>
+					    </div>
+					  </div>
+
+					  <div class="card">
+					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
+					    <div class="card-body">
+					      <h5 class="card-title">Card title</h5>
+					      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+					    </div>
+					    <div class="card-footer">
+					      <small class="text-muted">Last updated 3 mins ago</small>
+					    </div>
+					  </div>
+					</div>
+
+				</div>
 			</div>
-			<div class="mini_div" style="background-color: #D98880;">
+
+			<!-- CARD Y TABLE -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-4">
+					  <div class="card-header">
+					    Lista de usuarios registrados
+
+					    <button type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-primary float-right">
+					    	Añadir usuario
+					    </button>
+					  </div>
+					  <div class="card-body">
+					    
+					  	<table class="table table-bordered table-striped" >
+						  <thead class="thead-dark ">
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">First</th>
+						      <th scope="col">Last</th>
+						      <th scope="col">Handle</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <td>Mark</td>
+						      <td>Otto</td>
+						      <td>@mdo</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">2</th>
+						      <td>Jacob</td>
+						      <td>Thornton</td>
+						      <td>@fat</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">3</th>
+						      <td>Larry</td>
+						      <td>the Bird</td>
+						      <td>@twitter</td>
+						    </tr>
+						  </tbody>
+						</table>
+
+					  </div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
 				
-				<p class="parrafo_2" style="display: none">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
+				<div class="col-sm ">
+					<h1>
+						Título del post
+					</h1>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+					<a href="">
+						Leer más
+					</a>
+				</div>
 
-				<button id="button_2" >
-					Click me 
-				</button>
+				<div class="col-sm ">
+					<h1>
+						Título del post
+					</h1>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+					<a href="">
+						Leer más
+					</a>
+				</div>
+
+				<div class="col-sm ">
+					<h1>
+						Título del post
+					</h1>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+					<a href="">
+						Leer más
+					</a>
+				</div>
 
 			</div>
-			<div  class="otra_clase mini_div" style="background-color: #F9E79F;">
-				<p id="parrafo_12">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</b>
-				</p>
 
-				<button>
-					Click me 
-				</button>
-			</div>
-
-		</div> -->
-
-
-		<div class="line">
-			<hr>
-		</div>
-
-		<div class="mega_div">
-			<div id="app">
-				<label>
-					Nombre: {{ nombre }}
-				</label>
-			</div>
-
-			<div id="app-2">
-			  <span v-bind:title="message">
-			    Hover your mouse over me for a few seconds
-			    to see my dynamically bound title!
-			  </span>
-
-			  	<p v-if="on">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-
-				<ul> 
-					<li v-for="menu in menus" >
-						{{ menu.title }}
-					</li> 
-				</ul>
-
-
-				<button v-on:click="toggle">
-					Click
-				</button>
-
-				<input type="text" v-model="numUno" value="" name="name">
-				<input type="text" v-model="numDos" value="" name="name">
-				<button v-on:click="suma">
-					Suma
-				</button>
-			</div>
- 
-
-			
-		</div>
+		</div> 
 
 	</div>
 
- 	<script type="text/javascript" src="assets/js/jquery.js"></script>
- 	<script type="text/javascript">
- 		$(document).ready(function(){
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Understood</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
- 			// $.get('footer.html',function(r){
- 			// 	$(".super_div").append(r);
- 			// }) 
-
- 			$("#button_2").click(function(){
-
- 				var response;
-	 			$.ajax({ 
-				    url : 'proceso.php', 
-				    data : { year:var_year }, 
-				    type : 'POST', 
-				    dataType : 'text', 
-				    success : function(r) {
-				        console.log(r)  
-				    }, 
-				    error : function(xhr, status) {
-				        console.log(xhr)
-				        console.log(status)
-				    }, 
-				    complete : function(xhr, status) {
-				        // console.log(xhr)
-				        // console.log(status)
-				    }
-				});
-	 			
-
- 			})
- 			
-
- 		}) 
- 	</script>
- 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
- 	<script type="text/javascript">
- 		var app = new Vue({
- 			el: "#app",
- 			data:{
- 				nombre:'Jonathan'
- 			}
- 		})
- 		var app2 = new Vue({
-		  el: '#app-2',
-		  data: {
-		    message: 'You loaded this page on ' + new Date().toLocaleString(),
-		    on:false,
-		    menus:[ { title:'Desayunos' },{ title:'Comidas' },{ title: 'Cenas'} ],
-		    numUno: 0,
-		    numDos: 0
-		  },
-		  methods:{
-		  	toggle: function(){
-		  		this.on = (this.on)?false:true;
-		  	},
-		  	suma:function(){
-		  		console.log( parseInt(this.numUno) + parseInt(this.numDos));
-		  	}
-		  }
-		})
- 	</script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
