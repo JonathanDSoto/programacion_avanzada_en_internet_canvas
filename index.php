@@ -125,66 +125,11 @@
 		  </ol>
 		</nav>
 
-		<div class="jumbotron">
-
-		  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			      <img src="assets/images/aguacate.png" class="d-block w-100 h-20" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="assets/images/receta-de-guacamole-sin-tomate.jpg" class="d-block w-100 h-20" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="assets/images/shutterstock-768061894.jpg" class="d-block w-100 h-20" alt="...">
-			    </div>
-			  </div>
-			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			  </a>
-			  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-			  </a>
-			</div>
-
+		<?php if (isset($_POST['name'])): ?>
+		<div class="alert alert-danger" role="alert">
+		  A simple danger alert—check it out!
 		</div>
-
-		<div class="row mt-5">
-			<div class="card-deck">
-			  <div class="card">
-			    <img src="assets/images/aguacate.png" class="card-img-top" alt="...">
-			    <div class="card-body">
-			      <h5 class="card-title">Card title</h5>
-			      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			    </div>
-			    <div class="card-footer">
-			      <small class="text-muted">Last updated 3 mins ago</small>
-			    </div>
-			  </div>
-			  <div class="card">
-			    <img src="assets/images/aguacate.png" class="card-img-top" alt="...">
-			    <div class="card-body">
-			      <h5 class="card-title">Card title</h5>
-			      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-			    </div>
-			    <div class="card-footer">
-			      <small class="text-muted">Last updated 3 mins ago</small>
-			    </div>
-			  </div>
-			  <div class="card">
-			    <img src="assets/images/aguacate.png" class="card-img-top" alt="...">
-			    <div class="card-body">
-			      <h5 class="card-title">Card title</h5>
-			      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-			    </div>
-			    <div class="card-footer">
-			      <small class="text-muted">Last updated 3 mins ago</small>
-			    </div>
-			  </div>
-			</div>
-		</div>
+		<?php endif ?> 
 
 		<div class="row mt-5 ">
 			
@@ -207,6 +152,7 @@
 					      <th scope="col">#</th>
 					      <th scope="col">First</th>
 					      <th scope="col">Last</th>
+					      <th scope="col">Last</th>
 					      <th scope="col">Handle</th>
 					    </tr>
 					  </thead>
@@ -215,20 +161,27 @@
 					      <th scope="row">1</th>
 					      <td>Mark</td>
 					      <td>Otto</td>
-					      <td>@mdo</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">2</th>
-					      <td>Jacob</td>
-					      <td>Thornton</td>
-					      <td>@fat</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">3</th>
-					      <td>Larry</td>
-					      <td>the Bird</td>
-					      <td>@twitter</td>
-					    </tr>
+					      <td>
+					      	<span class="badge badge-success">
+					      		ACTIVO
+					      	</span>
+					      </td>
+					      <td>
+					      	<div class="btn-group" role="group">
+							    <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							      Acciones
+							    </button>
+							    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
+							      	<i class="fa fa-pencil"></i> Editar
+							      </a>
+							      <a class="dropdown-item" onclick="remove(1)" >
+							      	<i class="fa fa-trash"></i> Eliminar
+							      </a>
+							    </div>
+							  </div>
+					      </td>
+					    </tr> 
 					  </tbody>
 					</table> 
 				  </div>
@@ -236,112 +189,12 @@
 
 			</div>
 
-		</div>
-		
-		<div class="row mt-5">
-			<!--  -->
-			<div class="col-sm-4">
-				<h1>
-					Título del post
-				</h1>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<a href="">
-					Leer más
-				</a>
-			</div> 
+		</div> 
 
-			<div class="col-sm-4">
-				<h1>
-					Título del post
-				</h1>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<a href="">
-					Leer más
-				</a>
-			</div> 
-
-			<div class="col-sm-4">
-				<h1>
-					Título del post
-				</h1>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<a href="">
-					Leer más
-				</a>
-			</div> 
-			
-		</div>
-
-		<section id="footer">
-			<div class="container">
-				<div class="row text-center text-xs-center text-sm-left text-md-left">
-					<div class="col-xs-12 col-sm-4 col-md-4">
-						<h5>Quick links</h5>
-						<ul class="list-unstyled quick-links">
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-						</ul>
-					</div>
-					<div class="col-xs-12 col-sm-4 col-md-4">
-						<h5>Quick links</h5>
-						<ul class="list-unstyled quick-links">
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
-						</ul>
-					</div>
-					<div class="col-xs-12 col-sm-4 col-md-4">
-						<h5>Quick links</h5>
-						<ul class="list-unstyled quick-links">
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Home</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>About</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-							<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-							<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
-						</ul>
-					</div>
-				</div>
+		<section id="footer" class="mt-5">
+			<div class="container"> 
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-						<ul class="list-unstyled list-inline social text-center">
-							<li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-facebook"></i></a></li>
-							<li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-twitter"></i></a></li>
-							<li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-instagram"></i></a></li>
-							<li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-google-plus"></i></a></li>
-							<li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02" target="_blank"><i class="fa fa-envelope"></i></a></li>
-						</ul>
-					</div>
-					<hr>
-				</div>	
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-						<p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]</p>
+					<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white"> 
 						<p class="h6">© All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
 					</div>
 					<hr>
@@ -359,27 +212,157 @@
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
+
+	      	<div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">
+		        	Agregar usuario
+		        </h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        	<span aria-hidden="true">&times;</span>
+	        	</button>
+	      	</div>
+
+	      	<form action="" method="POST" onsubmit="return validateForm(this)">
+
+			    <div class="modal-body">
+			    	<div class="container"> 
+			        
+				        <!-- NOMBRE -->
+						<div class="form-group row">
+						    <label for="name" class="col-sm-3 col-form-label">
+						    	Nombre
+						    </label>
+						    <div class="col-sm-9">
+						    	<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">
+								    	<i class="fa fa-user"></i>
+								    </span>
+								  </div>
+								  <input type="text" class="form-control" id="name" required="" placeholder="Jhon">
+								</div> 
+						    </div>
+						</div>
+
+						<!-- APELLIDO -->
+						<div class="form-group row">
+						    <label for="lastname" class="col-sm-3 col-form-label">
+						    	Apellidos
+						    </label>
+						    <div class="col-sm-9">
+						    	<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">
+								    	<i class="fa fa-user"></i>
+								    </span>
+								  </div>
+								  <input type="text" class="form-control" id="lastname" required="" placeholder="Doe">
+								</div> 
+						    </div>
+						</div>
+
+						<!-- EMAIL -->
+						<div class="form-group row">
+						    <label for="email" class="col-sm-3 col-form-label">
+						    	Correo electrónico
+						    </label>
+						    <div class="col-sm-9">
+						    	<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">
+								    	<i class="fa fa-envelope"></i>
+								    </span>
+								  </div>
+								  <input type="email" class="form-control" id="email" required="" placeholder="Doe">
+								</div> 
+						    </div>
+						</div>
+
+						<!-- CONTRASEÑA -->
+						<div class="form-group row">
+						    <label for="password" class="col-sm-3 col-form-label">
+						    	Contraseña
+						    </label>
+						    <div class="col-sm-9">
+						    	<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">
+								    	<i class="fa fa-lock"></i>
+								    </span>
+								  </div>
+								  <input type="password" class="form-control" id="password" required="" placeholder="Doe">
+								</div> 
+						    </div>
+						</div>
+
+						<!-- C CONTRASEÑA -->
+						<div class="form-group row">
+						    <label for="password2" class="col-sm-3 col-form-label">
+						    	Repetir contraseña
+						    </label>
+						    <div class="col-sm-9">
+						    	<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">
+								    	<i class="fa fa-lock"></i>
+								    </span>
+								  </div>
+								  <input type="password" class="form-control" id="password2" required="" placeholder="Doe">
+								</div> 
+						    </div>
+						</div>
+
+					</div>
+			    </div>
+
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">
+		        		Cerrar
+		        	</button>
+		        	<button type="submit" class="btn btn-primary">
+		        		Guardar
+		        	</button>
+		      	</div>
+
+	      	</form>
+
 	    </div>
 	  </div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<script type="text/javascript">
+		function validateForm(target) { 
+			if ($("#password").val() == $("#password2").val()) {
+				return true;
+			}
+			return false;
+		}
+		function remove(id)
+		{
+			swal({
+			  title: "",
+			  text: "¿Desea eliminar el usuario?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    swal("Poof! Your imaginary file has been deleted!", {
+			      icon: "success",
+			    });
+			  } else {
+			    swal("Your imaginary file is safe!");
+			  }
+			});
+		}
+	</script>
 </body>
 </html>
