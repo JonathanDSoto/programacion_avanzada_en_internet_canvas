@@ -5,6 +5,7 @@
 		Learn bootstrap
 	</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -52,90 +53,6 @@
 			  </ol>
 			</nav>
 
-			<!-- CAROUSEL -->
-			<div class="jumbotron">
-			  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-				  <ol class="carousel-indicators">
-				    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-				    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-				    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-				  </ol>
-				  <div class="carousel-inner">
-				    <div class="carousel-item active">
-				      <img src="assets/images/tacos_al_pastor_1.jpg" class="d-block w-100" alt="tacos al pastor">
-				      <div class="carousel-caption d-none d-md-block">
-				        <h5>First slide label</h5>
-				        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-				      </div>
-				    </div>
-				    <div class="carousel-item">
-				      <img src="assets/images/tacos_al_pastor_2.jpeg" class="d-block w-100" alt="...">
-				      <div class="carousel-caption d-none d-md-block">
-				        <h5>Second slide label</h5>
-				        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				      </div>
-				    </div>
-				    <div class="carousel-item">
-				      <img src="assets/images/tacos_al_pastor_3.jpg" class="d-block w-100" alt="...">
-				      <div class="carousel-caption d-none d-md-block">
-				        <h5>Third slide label</h5>
-				        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-				      </div>
-				    </div>
-				  </div>
-				  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Previous</span>
-				  </a>
-				  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="sr-only">Next</span>
-				  </a>
-				</div>
-			</div> 
-
-			<!-- CARDS -->
-			<div class="row">
-				<div class="col-12"> 
-				
-					<div class="card-deck mb-4">
-
-					  <div class="card">
-					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
-					    <div class="card-body">
-					      <h5 class="card-title">Card title</h5>
-					      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-					    </div>
-					    <div class="card-footer">
-					      <small class="text-muted">Last updated 3 mins ago</small>
-					    </div>
-					  </div>
-
-					  <div class="card">
-					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
-					    <div class="card-body">
-					      <h5 class="card-title">Card title</h5>
-					      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-					    </div>
-					    <div class="card-footer">
-					      <small class="text-muted">Last updated 3 mins ago</small>
-					    </div>
-					  </div>
-
-					  <div class="card">
-					    <img src="assets/images/tacos_al_pastor_1.jpg" class="card-img-top" alt="...">
-					    <div class="card-body">
-					      <h5 class="card-title">Card title</h5>
-					      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-					    </div>
-					    <div class="card-footer">
-					      <small class="text-muted">Last updated 3 mins ago</small>
-					    </div>
-					  </div>
-					</div>
-
-				</div>
-			</div>
 
 			<!-- CARD Y TABLE -->
 			<div class="row">
@@ -184,62 +101,7 @@
 					  </div>
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-				
-				<div class="col-sm ">
-					<h1>
-						Título del post
-					</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-					<a href="">
-						Leer más
-					</a>
-				</div>
-
-				<div class="col-sm ">
-					<h1>
-						Título del post
-					</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-					<a href="">
-						Leer más
-					</a>
-				</div>
-
-				<div class="col-sm ">
-					<h1>
-						Título del post
-					</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-					<a href="">
-						Leer más
-					</a>
-				</div>
-
-			</div>
+			</div> 
 
 		</div> 
 
@@ -247,27 +109,123 @@
 
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-lg">
+
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        ...
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Understood</button>
-	      </div>
+	    	<div class="modal-header">
+	        	<h5 class="modal-title" id="staticBackdropLabel">
+	        		Agregar usuario
+	        	</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+	    	</div>
+
+	    	<form onsubmit="return validateRegister()" > 
+		      	<div class="modal-body">
+		        	
+		        	<!-- NOMBRE COMPLETO -->
+		      		<div class="form-group">
+					    <label for="name">
+					    	Nombre completo
+					    </label> 
+					    <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">
+						    	<i class="fa fa-user"></i>
+						    </span>
+						  </div>
+						  <input type="text" class="form-control " id="name" aria-describedby="emailHelp" placeholder="Juanito Leon" required="">
+						</div>
+					    <small id="emailHelp" class="form-text text-muted">
+					    	No ingresar números.
+					    </small>
+					</div>
+
+					<!-- CORREO ELÉCTRONICO -->
+		      		<div class="form-group">
+					    <label for="email">
+					    	Correo electrónico
+					    </label> 
+					    <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">
+						    	<i class="fa fa-envelope"></i>
+						    </span>
+						  </div>
+						  <input type="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="juanito@domain.com" required="">
+						</div> 
+					</div>
+
+					<!-- CONTRASEÑA -->
+		      		<div class="form-group">
+					    <label for="password">
+					    	Contraseña
+					    </label> 
+					    <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">
+						    	<i class="fa fa-lock"></i>
+						    </span>
+						  </div>
+						  <input type="password" minlength="4" class="form-control " id="password" aria-describedby="emailHelp" placeholder="* * * * * *" required="">
+						</div> 
+					</div>
+
+					<!-- CONTRASEÑA -->
+		      		<div class="form-group">
+					    <label for="password2">
+					    	Verificar contraseña
+					    </label> 
+					    <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon1">
+						    	<i class="fa fa-lock"></i>
+						    </span>
+						  </div>
+						  <input type="password" minlength="4" class="form-control " id="password2" aria-describedby="emailHelp" placeholder="* * * * * *" required="">
+						</div> 
+					</div>
+
+		      	</div>
+
+		    	<div class="modal-footer">
+		        	<button type="button" class="btn btn-warning" data-dismiss="modal">
+		        		Cancelar
+		        	</button>
+		        	<button type="submit" class="btn btn-primary">
+		        		Guardar
+		        	</button>
+		    	</div>
+	    	</form>
+
 	    </div>
+
 	  </div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		function validateRegister()
+		{
+			console.log(1)
+			if($("#password").val() == $("#password2").val()){
+				console.log(2)
+				return true;
+			}else{
+				console.log(3)
+				$("#password").addClass('is-invalid')
+				$("#password2").addClass('is-invalid')
+
+				swal("", "Las contraseñas no coinciden", "error"); 
+
+				return false;
+			} 
+			console.log(4)
+		}
+	</script>
 </body>
 </html>
