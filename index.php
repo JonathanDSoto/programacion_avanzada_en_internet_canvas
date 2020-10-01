@@ -1,3 +1,10 @@
+<?php 
+	include "controllers/UserController.php";
+	$userController = new UserController();
+
+	$users = $userController->get();
+	#echo json_encode($users);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,30 +78,31 @@
 						  <thead class="thead-dark ">
 						    <tr>
 						      <th scope="col">#</th>
-						      <th scope="col">First</th>
-						      <th scope="col">Last</th>
-						      <th scope="col">Handle</th>
+						      <th scope="col">Nombre</th>
+						      <th scope="col">Correo eletrónico</th>
+						      <th scope="col">Estatus</th>
+						      <th scope="col">Acciones</th>
 						    </tr>
 						  </thead>
 						  <tbody>
 						    <tr>
 						      <th scope="row">1</th>
 						      <td>Mark</td>
-						      <td>Otto</td>
+						      <td>
+						      	<a href="mailto:otto@example.com">
+						      		Otto@example.com
+						      	</a>
+						      </td>
 						      <td>@mdo</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">2</th>
-						      <td>Jacob</td>
-						      <td>Thornton</td>
-						      <td>@fat</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">3</th>
-						      <td>Larry</td>
-						      <td>the Bird</td>
-						      <td>@twitter</td>
-						    </tr>
+						      <td>
+						      	<button data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-warning">
+						      		<i class="fa fa-pencil"></i> Editar
+						      	</button>
+						      	<button onclick="remove(1)" type="button" class="btn btn-danger">
+							      	<i class="fa fa-trash"></i> Eliminar
+							    </button>
+						      </td>
+						    </tr> 
 						  </tbody>
 						</table>
 
@@ -211,12 +219,9 @@
 	<script type="text/javascript">
 		function validateRegister()
 		{
-			console.log(1)
 			if($("#password").val() == $("#password2").val()){
-				console.log(2)
 				return true;
 			}else{
-				console.log(3)
 				$("#password").addClass('is-invalid')
 				$("#password2").addClass('is-invalid')
 
@@ -224,7 +229,25 @@
 
 				return false;
 			} 
-			console.log(4)
+		}
+		function remove(id){
+			swal({
+			  title: "",
+			  text: "¿Desea eliminar el usuario?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true, 
+			  buttons: ["Cancelar", "Eliminar"]
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    swal("Usuario eliminado con exito!", {
+			      icon: "success",
+			    });
+			  } else {
+			    //swal("Your imaginary file is safe!");
+			  }
+			});
 		}
 	</script>
 </body>
