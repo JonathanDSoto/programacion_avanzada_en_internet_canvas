@@ -1,3 +1,9 @@
+<?php 
+	include "controllers/UserController.php";
+	$userController = new UserController();
+
+	$users = $userController->get(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,6 +94,7 @@
 
 	<div class="container">
 
+		<!-- NAV -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		  <a class="navbar-brand" href="#">
 		  	Guacamole
@@ -119,13 +126,15 @@
 		  </div>
 		</nav>
 
+		<!-- BREAD -->
 		<nav aria-label="breadcrumb ">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item active" aria-current="page">Home</li>
 		  </ol>
 		</nav>
 
-		<?php if (isset($_POST['name'])): ?>
+		<!-- NOTIFICATION -->
+		<?php if (isset($_SESSION['message'])): ?>
 		<div class="alert alert-danger" role="alert">
 		  A simple danger alert—check it out!
 		</div>
@@ -140,7 +149,7 @@
 				    
 				    Tabla de usuarios registrados
 
-				    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+				    <button onclick="add()" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
 				    	Añadir usuario
 				    </button>
 
@@ -172,7 +181,7 @@
 							      Acciones
 							    </button>
 							    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
+							      <a onclick="edit(this)" class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
 							      	<i class="fa fa-pencil"></i> Editar
 							      </a>
 							      <a class="dropdown-item" onclick="remove(1)" >
@@ -338,11 +347,26 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<script type="text/javascript">
+
+		function add(){
+			$("#exampleModalLabel").text('Añadir usuario')
+		}
+		function edit(target){
+			$("#exampleModalLabel").text('Editar usuario')
+		}
+		
 		function validateForm(target) { 
-			if ($("#password").val() == $("#password2").val()) {
+			if ($("#password").val() == $("#password2").val()) { 
 				return true;
+			}else{
+				swal("Las contraseñas no coinciden", "", "error");
+				$("#password").addClass('is-invalid')
+				$("#password2").addClass('is-invalid')
+
+				return false;
 			}
-			return false;
+
+			
 		}
 		function remove(id)
 		{
