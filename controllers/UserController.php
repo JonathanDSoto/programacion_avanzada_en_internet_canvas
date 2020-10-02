@@ -1,7 +1,7 @@
 <?php 
 	
-include_once "connectionController.php";
 include_once "config.php";
+include_once "connectionController.php";
 
 if (isset($_POST['action'])) {
 
@@ -12,11 +12,25 @@ if (isset($_POST['action'])) {
 			$name = strip_tags($_POST['name']);
 			$last = strip_tags($_POST['last']);
 			$email = strip_tags($_POST['email']);
-			$pass = strip_tags($_POST['pass']);
+			$pass = strip_tags($_POST['pass']); 
 
 			$userController->store($name,$last,$email,$pass);
 
-			break; 
+		break;
+		case 'update': 
+			$name = strip_tags($_POST['name']);
+			$last = strip_tags($_POST['last']);
+			$email = strip_tags($_POST['email']);
+			$pass = strip_tags($_POST['pass']);
+			$id = strip_tags($_POST['id']);
+
+			$userController->update($name,$last,$email,$pass,$id); 
+		break; 
+		case 'remove':
+			$id = strip_tags($_POST['id']);
+
+			echo json_encode($userController->remove($id)); 
+		break;
 	}
 }
 
@@ -48,7 +62,7 @@ class UserController
 		if (!$conn->connect_error) {
 			if($name!="" && $last!="" && $email!="" && $pass!=""){
 
-				$query = "isert into users (name,lastname,email,password) values (?,?,?,?)";
+				$query = "insert into users (name,lastname,email,password) values (?,?,?,?)";
 				$prepared_query = $conn->prepare($query);
 				$prepared_query->bind_param('ssss',$name,$last,$email,$pass);
 				if ($prepared_query->execute()) {
@@ -72,6 +86,77 @@ class UserController
 			$_SESSION['message'] = "Problemas con la conexión al servidor";
 			$_SESSION['status'] = "error";
 			header("Location: ".$_SERVER['HTTP_REFERER']);
+		}
+	}
+
+	function update($name,$last,$email,$pass,$id){
+		$conn = connect();
+		if (!$conn->connect_error) {
+			if($name!="" && $last!="" && $email!="" && $pass!="" && $id!=""){
+				 
+				$query = "update users set name = ?, lastname = ?, email = ?, password = ? where id = ?";
+				$prepared_query = $conn->prepare($query);
+				$prepared_query->bind_param('ssssi',$name,$last,$email,$pass,$id);
+				if ($prepared_query->execute()) {
+
+					$_SESSION['message'] = "Registro actualizado exitosamente";
+					$_SESSION['status'] = "success";
+					header("Location: ".$_SERVER['HTTP_REFERER']);
+					
+				}else{
+					$_SESSION['message'] = "El proceso no pudo ser completado";
+					$_SESSION['status'] = "error";
+					header("Location: ".$_SERVER['HTTP_REFERER']);
+				}
+
+			}else{
+				$_SESSION['message'] = "Verifique la información";
+				$_SESSION['status'] = "error";
+				header("Location: ".$_SERVER['HTTP_REFERER']);
+			}
+		}else{
+			$_SESSION['message'] = "Problemas con la conexión al servidor";
+			$_SESSION['status'] = "error";
+			header("Location: ".$_SERVER['HTTP_REFERER']);
+		}
+	}
+
+	function remove($id){
+		$conn = connect();
+		if (!$conn->connect_error) {
+			if($id!=""){
+				 
+				$query = "delete from users where id = ?";
+				$prepared_query = $conn->prepare($query);
+				$prepared_query->bind_param('i',$id);
+
+				if ($prepared_query->execute()) {
+					$response = array(
+						"status" => "success",
+						"message" => "Usuario eliminado correctamente",
+					);
+					return $response;
+				}else{
+					$response = array(
+						"status" => "error",
+						"message" => "Ocurrió un error durante el proceso",
+					);
+					return $response;
+				}
+
+			}else{
+				$response = array(
+					"status" => "error",
+					"message" => "Verifique la información",
+				);
+				return $response;
+			}
+		}else{
+			$response = array(
+				"status" => "error",
+				"message" => "Problemas con la conexión al servidor",
+			);
+			return $response; 
 		}
 	}
 }

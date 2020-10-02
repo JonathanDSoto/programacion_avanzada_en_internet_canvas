@@ -2,7 +2,8 @@
 	include "controllers/UserController.php";
 	$userController = new UserController();
 
-	$users = $userController->get(); 
+	$users = $userController->get();
+	#echo json_encode($users); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -134,10 +135,24 @@
 		</nav>
 
 		<!-- NOTIFICATION -->
-		<?php if (isset($_SESSION['message'])): ?>
-		<div class="alert alert-danger" role="alert">
-		  A simple danger alert—check it out!
-		</div>
+		<?php if (isset($_SESSION['status']) && $_SESSION['status']=='success'): ?>
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		  <strong>Correcto!</strong> <?= $_SESSION['message'] ?>.
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div> 
+		<?php unset($_SESSION['status']); ?>
+		<?php endif ?> 
+
+		<?php if (isset($_SESSION['status']) && $_SESSION['status']=='error'): ?>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  <strong>Error!</strong> <?= $_SESSION['message'] ?>.
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div> 
+		<?php unset($_SESSION['status']); ?>
 		<?php endif ?> 
 
 		<div class="row mt-5 ">
@@ -159,21 +174,41 @@
 					  <thead class="thead-dark">
 					    <tr>
 					      <th scope="col">#</th>
-					      <th scope="col">First</th>
-					      <th scope="col">Last</th>
-					      <th scope="col">Last</th>
-					      <th scope="col">Handle</th>
+					      <th scope="col">Nombre</th>
+					      <th scope="col">Apellidos</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Estatus</th>
+					      <th scope="col">Acciones</th>
 					    </tr>
 					  </thead>
 					  <tbody>
+					  	<?php foreach ($users as $user): ?> 
 					    <tr>
-					      <th scope="row">1</th>
-					      <td>Mark</td>
-					      <td>Otto</td>
+					      <th scope="row">
+					      	<?= $user['id'] ?>
+					      </th>
 					      <td>
+					      	<?= $user['name'] ?>
+					      </td>
+					      <td>
+					      	<?= $user['lastname'] ?>
+					      </td>
+					      <td>
+					      	<a href="mailto:<?= $user['email'] ?>">
+					      		<?= $user['email'] ?>
+					      	</a>
+					      </td>
+					      <td>
+					      	<?php if ($user['status']): ?>
 					      	<span class="badge badge-success">
 					      		ACTIVO
-					      	</span>
+					      	</span> 
+					      	<?php endif ?>
+					      	<?php if (!$user['status']): ?>
+					      	<span class="badge badge-warning">
+					      		INACTIVO
+					      	</span> 
+					      	<?php endif ?>
 					      </td>
 					      <td>
 					      	<div class="btn-group" role="group">
@@ -181,16 +216,17 @@
 							      Acciones
 							    </button>
 							    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							      <a onclick="edit(this)" class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
+							      <a data-info='<?= json_encode($user) ?>' onclick="edit(this)" class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
 							      	<i class="fa fa-pencil"></i> Editar
 							      </a>
-							      <a class="dropdown-item" onclick="remove(1)" >
+							      <a class="dropdown-item" onclick="remove(<?= $user['id'] ?>)" >
 							      	<i class="fa fa-trash"></i> Eliminar
 							      </a>
 							    </div>
 							  </div>
 					      </td>
 					    </tr> 
+					    <?php endforeach ?>
 					  </tbody>
 					</table> 
 				  </div>
@@ -233,7 +269,7 @@
 	        	</button>
 	      	</div>
 
-	      	<form action="" method="POST" onsubmit="return validateForm(this)">
+	      	<form action="controllers/UserController.php" method="POST" onsubmit="return validateForm(this)">
 
 			    <div class="modal-body">
 			    	<div class="container"> 
@@ -250,7 +286,7 @@
 								    	<i class="fa fa-user"></i>
 								    </span>
 								  </div>
-								  <input type="text" class="form-control" id="name" required="" placeholder="Jhon">
+								  <input type="text" class="form-control" id="name" required="" placeholder="Jhon" name="name">
 								</div> 
 						    </div>
 						</div>
@@ -267,7 +303,7 @@
 								    	<i class="fa fa-user"></i>
 								    </span>
 								  </div>
-								  <input type="text" class="form-control" id="lastname" required="" placeholder="Doe">
+								  <input type="text" class="form-control" id="lastname" required="" placeholder="Doe" name="last">
 								</div> 
 						    </div>
 						</div>
@@ -284,7 +320,7 @@
 								    	<i class="fa fa-envelope"></i>
 								    </span>
 								  </div>
-								  <input type="email" class="form-control" id="email" required="" placeholder="Doe">
+								  <input type="email" class="form-control" id="email" required="" placeholder="Doe" name="email">
 								</div> 
 						    </div>
 						</div>
@@ -301,7 +337,7 @@
 								    	<i class="fa fa-lock"></i>
 								    </span>
 								  </div>
-								  <input type="password" class="form-control" id="password" required="" placeholder="Doe">
+								  <input type="password" class="form-control" id="password" required="" placeholder="Doe" name="pass">
 								</div> 
 						    </div>
 						</div>
@@ -318,7 +354,7 @@
 								    	<i class="fa fa-lock"></i>
 								    </span>
 								  </div>
-								  <input type="password" class="form-control" id="password2" required="" placeholder="Doe">
+								  <input type="password" class="form-control" id="password2" required="" placeholder="Doe"> 
 								</div> 
 						    </div>
 						</div>
@@ -333,6 +369,8 @@
 		        	<button type="submit" class="btn btn-primary">
 		        		Guardar
 		        	</button>
+		        	<input type="hidden" id="action" name="action" value="store">
+		        	<input type="hidden" id="user_id" name="id">
 		      	</div>
 
 	      	</form>
@@ -345,14 +383,29 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	
 	<script type="text/javascript">
 
 		function add(){
 			$("#exampleModalLabel").text('Añadir usuario')
+			$("#action").val('store')
 		}
 		function edit(target){
 			$("#exampleModalLabel").text('Editar usuario')
+			$("#action").val('update')
+
+			var info = $(target).data('info')
+
+			$("#user_id").val(info.id)
+			$("#name").val(info.name)
+			$("#lastname").val(info.lastname)
+			$("#email").val(info.email)
+			$("#password").val(info.password)
+			$("#password2").val(info.password)
+
+			console.log(info)
 		}
 		
 		function validateForm(target) { 
@@ -377,13 +430,35 @@
 			  buttons: true,
 			  dangerMode: true,
 			})
-			.then((willDelete) => {
+			.then(function (willDelete) {
 			  if (willDelete) {
-			    swal("Poof! Your imaginary file has been deleted!", {
-			      icon: "success",
+			    
+			  	swal("Espere, el proceso se esta ejecutando!", {
+			      icon: "info",
 			    });
-			  } else {
-			    swal("Your imaginary file is safe!");
+
+			    $.ajax({ 
+				    url : 'controllers/UserController.php', 
+				    data : {id: id, action: 'remove'},
+				    type : 'POST', 
+				    dataType : 'json', 
+				    success : function(json) {
+				        if (json.status==="success") {
+				        	swal(json.message, {
+						      icon: "success",
+						    });
+				        	setTimeout(location.reload(),2000);
+				        }else{
+				        	swal(json.message, {
+						      icon: "error",
+						    });
+				        }
+				    },
+				    error : function(xhr, status) {
+				        alert('Disculpe, existió un problema');
+				    }
+				}); 
+
 			  }
 			});
 		}
