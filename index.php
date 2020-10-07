@@ -60,6 +60,26 @@
 			  </ol>
 			</nav>
 
+			<!-- NOTIFICATION -->
+			<?php if (isset($_SESSION['status']) && $_SESSION['status']=="success"): ?>  
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+			  <strong>Correcto!</strong> <?= $_SESSION['message'] ?>.
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<?php unset($_SESSION['status']); ?>
+			<?php endif ?>
+
+			<?php if (isset($_SESSION['status']) && $_SESSION['status']=="error"): ?>  
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			  <strong>Error!</strong> <?= $_SESSION['message'] ?>.
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<?php unset($_SESSION['status']); ?>
+			<?php endif ?>
 
 			<!-- CARD Y TABLE -->
 			<div class="row">
@@ -85,15 +105,36 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  	<?php if (isset($users) && count($users)>0): ?>
+						  	<?php foreach ($users as $user): ?> 
+						  	
 						    <tr>
-						      <th scope="row">1</th>
-						      <td>Mark</td>
+						      <th scope="row">
+						     	<?= $user['id'] ?>
+						      </th>
 						      <td>
-						      	<a href="mailto:otto@example.com">
-						      		Otto@example.com
+						      	<?= $user['name'] ?>
+						      </td>
+						      <td>
+						      	<a href="mailto:<?= $user['email'] ?>">
+						      		<?= $user['email'] ?>
 						      	</a>
 						      </td>
-						      <td>@mdo</td>
+						      <td>
+						      	<?php if ($user['status']): ?>
+
+						      		<span class="badge badge-success">
+						      			Activo
+						      		</span>
+
+						      	<?php else: ?>
+
+						      		<span class="badge badge-warning">
+						      			Inactivo
+						      		</span>
+
+						      	<?php endif ?>
+						      </td>
 						      <td>
 						      	<button data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-warning">
 						      		<i class="fa fa-pencil"></i> Editar
@@ -103,6 +144,9 @@
 							    </button>
 						      </td>
 						    </tr> 
+
+						    <?php endforeach ?>
+						    <?php endif ?>
 						  </tbody>
 						</table>
 
@@ -129,7 +173,7 @@
 		        </button>
 	    	</div>
 
-	    	<form onsubmit="return validateRegister()" > 
+	    	<form method="POST" action="controllers/UserController.php" onsubmit="return validateRegister()" > 
 		      	<div class="modal-body">
 		        	
 		        	<!-- NOMBRE COMPLETO -->
@@ -143,7 +187,7 @@
 						    	<i class="fa fa-user"></i>
 						    </span>
 						  </div>
-						  <input type="text" class="form-control " id="name" aria-describedby="emailHelp" placeholder="Juanito Leon" required="">
+						  <input type="text" class="form-control " id="name" aria-describedby="emailHelp" placeholder="Juanito Leon" required="" name="name">
 						</div>
 					    <small id="emailHelp" class="form-text text-muted">
 					    	No ingresar números.
@@ -161,7 +205,7 @@
 						    	<i class="fa fa-envelope"></i>
 						    </span>
 						  </div>
-						  <input type="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="juanito@domain.com" required="">
+						  <input type="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="juanito@domain.com" required="" name="email">
 						</div> 
 					</div>
 
@@ -176,7 +220,7 @@
 						    	<i class="fa fa-lock"></i>
 						    </span>
 						  </div>
-						  <input type="password" minlength="4" class="form-control " id="password" aria-describedby="emailHelp" placeholder="* * * * * *" required="">
+						  <input type="password" minlength="4" class="form-control " id="password" aria-describedby="emailHelp" placeholder="* * * * * *" required="" name="password">
 						</div> 
 					</div>
 
@@ -204,6 +248,7 @@
 		        	<button type="submit" class="btn btn-primary">
 		        		Guardar
 		        	</button>
+		        	<input type="hidden" name="action" value="store">
 		    	</div>
 	    	</form>
 
