@@ -88,7 +88,7 @@
 					  <div class="card-header">
 					    Lista de usuarios registrados
 
-					    <button type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-primary float-right">
+					    <button type="button" data-toggle="modal" data-target="#staticBackdrop" class="btn btn-primary float-right" onclick="add()">
 					    	Añadir usuario
 					    </button>
 					  </div>
@@ -136,7 +136,7 @@
 						      	<?php endif ?>
 						      </td>
 						      <td>
-						      	<button data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-warning">
+						      	<button data-info='<?= json_encode($user) ?>' data-toggle="modal" data-target="#staticBackdrop" type="button" class="btn btn-warning" onclick="editar(this)">
 						      		<i class="fa fa-pencil"></i> Editar
 						      	</button>
 						      	<button onclick="remove(1)" type="button" class="btn btn-danger">
@@ -173,7 +173,7 @@
 		        </button>
 	    	</div>
 
-	    	<form method="POST" action="controllers/UserController.php" onsubmit="return validateRegister()" > 
+	    	<form method="POST" id="myForm" action="controllers/UserController.php" onsubmit="return validateRegister()" > 
 		      	<div class="modal-body">
 		        	
 		        	<!-- NOMBRE COMPLETO -->
@@ -248,7 +248,8 @@
 		        	<button type="submit" class="btn btn-primary">
 		        		Guardar
 		        	</button>
-		        	<input type="hidden" name="action" value="store">
+		        	<input type="hidden" name="action" id="action" value="store">
+		        	<input type="hidden" name="id" id="id">
 		    	</div>
 	    	</form>
 
@@ -293,6 +294,23 @@
 			    //swal("Your imaginary file is safe!");
 			  }
 			});
+		}
+		function editar(target)
+		{
+			var info = $(target).data('info');
+
+			$("#name").val(info.name)
+			$("#email").val(info.email)
+			$("#password").val(info.password)
+			$("#password2").val(info.password) 
+			$("#id").val(info.id)
+
+			$("#action").val('update')
+		}
+		function add()
+		{
+			$("#action").val('store')
+			document.getElementById("myForm").reset();
 		}
 	</script>
 </body>

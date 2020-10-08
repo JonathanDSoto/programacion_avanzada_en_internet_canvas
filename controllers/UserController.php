@@ -10,14 +10,22 @@
 		switch ($_POST['action']) {
 			case 'store':
 				
-				//var_dump($_SERVER);
 				$name  = strip_tags($_POST['name']);
 				$email = strip_tags($_POST['email']);
 				$pass = strip_tags($_POST['password']);
 
 				$userController->store($name,$email,$pass);
 
-				break; 
+			break;
+
+			case 'update':
+				$name  = strip_tags($_POST['name']);
+				$email = strip_tags($_POST['email']);
+				$pass = strip_tags($_POST['password']);
+				$id = strip_tags($_POST['id']);
+
+				$userController->update($name,$email,$pass,$id);
+			break; 
 		}
 	}
 
@@ -64,6 +72,51 @@
 
 						$_SESSION['status'] = "error";
 						$_SESSION['message'] = "El registro no se ha guardado";
+
+						header('Location: ' . $_SERVER['HTTP_REFERER']);
+					}
+
+				}else{
+
+					$_SESSION['status'] = "error";
+					$_SESSION['message'] = "Verifique la información enviada";
+
+					header('Location: ' . $_SERVER['HTTP_REFERER']);
+				}
+
+			}else{
+
+				$_SESSION['status'] = "error";
+				$_SESSION['message'] = "Error durante la conexión";
+
+				header('Location: ' . $_SERVER['HTTP_REFERER']);
+			}
+		}
+
+		public function update($name, $email, $password, $id)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+
+				if($name!="" && $email!="" && $password !="" && $id !=""){
+
+					$query = "update users set name = ?, email = ?, password = ? where id = ?";
+
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('sssi',$name, $email, $password, $id);
+
+					if ($prepared_query->execute()) {
+
+						//var_dump($_POST);
+						
+						$_SESSION['status'] = "success";
+						$_SESSION['message'] = "El registro se ha actualizado correctametne";
+
+						header('Location: ' . $_SERVER['HTTP_REFERER']);
+					}else{
+
+						$_SESSION['status'] = "error";
+						$_SESSION['message'] = "El registro no se ha actualizado";
 
 						header('Location: ' . $_SERVER['HTTP_REFERER']);
 					}
