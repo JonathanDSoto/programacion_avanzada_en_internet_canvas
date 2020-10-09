@@ -4,34 +4,38 @@ include_once "config.php";
 include_once "connectionController.php";
 
 if (isset($_POST['action'])) {
+	if ($_SESSION['token'] == $_POST['token']) { 
 
-	$userController = new UserController();
+		$userController = new UserController();
 
-	switch ($_POST['action']) {
-		case 'store':
-			$name = strip_tags($_POST['name']);
-			$last = strip_tags($_POST['last']);
-			$email = strip_tags($_POST['email']);
-			$pass = strip_tags($_POST['pass']); 
+		switch ($_POST['action']) {
+			case 'store':
+				$name = strip_tags($_POST['name']);
+				$last = strip_tags($_POST['last']);
+				$email = strip_tags($_POST['email']);
+				$pass = strip_tags($_POST['pass']); 
 
-			$userController->store($name,$last,$email,$pass);
+				$userController->store($name,$last,$email,$pass);
 
-		break;
-		case 'update': 
-			$name = strip_tags($_POST['name']);
-			$last = strip_tags($_POST['last']);
-			$email = strip_tags($_POST['email']);
-			$pass = strip_tags($_POST['pass']);
-			$id = strip_tags($_POST['id']);
+			break;
+			case 'update': 
+				$name = strip_tags($_POST['name']);
+				$last = strip_tags($_POST['last']);
+				$email = strip_tags($_POST['email']);
+				$pass = strip_tags($_POST['pass']);
+				$id = strip_tags($_POST['id']);
 
-			$userController->update($name,$last,$email,$pass,$id); 
-		break; 
-		case 'remove':
-			$id = strip_tags($_POST['id']);
+				$userController->update($name,$last,$email,$pass,$id); 
+			break; 
+			case 'remove':
+				$id = strip_tags($_POST['id']);
 
-			echo json_encode($userController->remove($id)); 
-		break;
-	}
+				echo json_encode($userController->remove($id)); 
+			break;
+		}
+
+	}else
+		echo json_encode("{code:error}");
 }
 
 class UserController 
