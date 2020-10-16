@@ -17,10 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', function () {
-    return view('casa');
-});
+Route::get('/contact','WebController@contact');
 
-Route::get('/user/{id?}', function ($id='0') { 
-    return view('home',compact('id'));
-});

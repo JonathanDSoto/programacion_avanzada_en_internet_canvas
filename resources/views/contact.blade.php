@@ -5,7 +5,10 @@
 </head>
 <body>
 	<h1>
-		Hola mundo <?= $id ?>
+		Hola {{ $name }} {{ $lastname }}
 	</h1>
+	<p>
+		{{ $parrafo }}
+	</p>
 </body>
 </html>
