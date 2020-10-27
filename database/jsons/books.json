@@ -1,0 +1,38 @@
+[
+	{
+		"title" : "LA BAILARINA DE AUSCHWITZ",
+		"description" : "Un libro sobrecogedor, potente e inspirador que busca ayudar a todos aquellos cuyos traumas les impiden vivir en plenitud. Como su mentor Viktor Frankl, Edith Eger es una superviviente cuya experiencia vital y trayectoria como psicóloga le han permitido ayudar a miles de personas que viven incapacitadas por sus cicatrices emocionales.",
+		"year" : 2018,
+		"pages" : 416,
+		"isbn" : "6070749006",
+		"editorial" : "PLANETA",
+		"edition" : 1,
+		"autor" : "EDITH EGER",
+		"cover" : "bailarina.png",
+		"category_id": 1
+	},
+	{
+		"title" : "LIBRO 2",
+		"description" : "Descripción del libro 2",
+		"year" : 2018,
+		"pages" : 416,
+		"isbn" : "6070749004",
+		"editorial" : "PLANETA",
+		"edition" : 1,
+		"autor" : "EDITH EGER",
+		"cover" : "libro2.png",
+		"category_id": 2
+	},
+	{
+		"title" : "LIBRO 3",
+		"description" : "Descripción del libro 3",
+		"year" : 2018,
+		"pages" : 416,
+		"isbn" : "6070722004",
+		"editorial" : "PLANETA",
+		"edition" : 1,
+		"autor" : "EDITH EGER",
+		"cover" : "libro3.png",
+		"category_id": 3
+	}
+]
