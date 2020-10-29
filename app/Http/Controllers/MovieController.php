@@ -14,7 +14,10 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        #$movies = Movie::where('category_id',4)->get();
+        $movies = Movie::all();
+
+        return view('movies.index',compact('movies'));
     }
 
     /**
