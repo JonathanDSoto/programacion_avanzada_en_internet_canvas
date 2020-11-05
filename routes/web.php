@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function(){
 
 
 	Route::get('/movies','MovieController@index')->name('movies');
+
 	Route::get('/categories','CategoryController@index');
+	Route::put('/categories','CategoryController@update');
 
 });
