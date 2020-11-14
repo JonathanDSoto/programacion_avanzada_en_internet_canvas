@@ -28,7 +28,10 @@ Route::middleware(['auth'])->group(function(){
 
 
 	Route::get('/movies','MovieController@index')->name('movies');
+	#Route::get('/movies/{id}','MovieController@show');
+	Route::get('/movies-info/{movie}','MovieController@get');
 	Route::post('/movies','MovieController@store');
+	Route::put('/movies/{movie}','MovieController@update');
 
 	Route::get('/categories','CategoryController@index');
 	Route::put('/categories','CategoryController@update');
