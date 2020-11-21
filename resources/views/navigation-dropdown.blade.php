@@ -49,6 +49,8 @@
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
 
+                        @if (Auth::user()->hasRole('Admin') ) 
+
                         <x-jet-dropdown-link href="{{ route('movies') }}">
                             {{ __('Movies') }}
                         </x-jet-dropdown-link>
@@ -56,6 +58,8 @@
                         <x-jet-dropdown-link href="{{ url('categories') }}">
                             {{ __('Categories') }}
                         </x-jet-dropdown-link>
+
+                        @endif
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">

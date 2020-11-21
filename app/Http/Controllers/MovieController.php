@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Auth;
 
 class MovieController extends Controller
 {
@@ -15,11 +16,17 @@ class MovieController extends Controller
      */
     public function index()
     {
-        #$movies = Movie::where('category_id',4)->get();
-        $movies = Movie::with('category')->get(); 
-        $categories = Category::all();
 
-        return view('movies.index',compact('movies','categories'));
+        if (Auth::user()->hasPermissionTo('view movies')) { 
+
+            
+            $movies = Movie::with('category')->get(); 
+            $categories = Category::all();
+
+            return view('movies.index',compact('movies','categories'));
+
+        }
+        return redirect()->back()->with('error','no tienes permisos');
     }
 
     /**
@@ -40,26 +47,31 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        if ($movie = Movie::create($request->all())) {
+        if (Auth::user()->hasPermissionTo('add movies')) { 
 
-            if ($request->hasFile('cover_file')) {
-                
-                $file = $request->file('cover_file');
-                $file_name = 'cover_movie'.$movie->id.'.'.$file->getClientOriginalExtension();
+            if ($movie = Movie::create($request->all())) {
 
-                $path = $request->file('cover_file')->storeAs(
-                    'img', $file_name
-                );
+                if ($request->hasFile('cover_file')) {
+                    
+                    $file = $request->file('cover_file');
+                    $file_name = 'cover_movie'.$movie->id.'.'.$file->getClientOriginalExtension();
 
-                $movie->cover = $file_name;
-                $movie->save();
+                    $path = $request->file('cover_file')->storeAs(
+                        'img', $file_name
+                    );
+
+                    $movie->cover = $file_name;
+                    $movie->save();
 
 
+                }
+
+                return redirect()->back();
             }
-
             return redirect()->back();
+        
         }
-        return redirect()->back();
+        return redirect()->back()->with('error','no tienes permisos');
     }
 
     /**
