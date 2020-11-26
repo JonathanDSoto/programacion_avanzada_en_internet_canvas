@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class BookController extends Controller
 {
     /**
@@ -39,27 +41,33 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        if ($book = Book::create( $request->all() )) {
 
-            if ($request->hasFile('cover')) {
-                
-                $file = $request->file('cover');
-                $file_name = 'book_cover_'.$book->id.'.'.$file->getClientOriginalExtension();
+        if (Auth::user()->hasPermissionTo('add books')) { 
+        
 
-                $path = $request->file('cover')->storeAs(
+            if ($book = Book::create( $request->all() )) {
 
-                    'img/books',$file_name
-                );
+                if ($request->hasFile('cover')) {
+                    
+                    $file = $request->file('cover');
+                    $file_name = 'book_cover_'.$book->id.'.'.$file->getClientOriginalExtension();
 
-                $book->cover = $file_name;
-                $book->save();
+                    $path = $request->file('cover')->storeAs(
 
+                        'img/books',$file_name
+                    );
+
+                    $book->cover = $file_name;
+                    $book->save();
+
+                }
+
+                return redirect()->back();
             }
 
-            return redirect()->back();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('error','No tiene permisos');
     }
 
     /**
